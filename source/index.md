@@ -24,6 +24,10 @@ We have language bindings in Shell, Ruby, and Python! You can view code examples
 
 This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
+Test
+
+# Test
+
 # Authentication
 
 > To authorize, use this code:
