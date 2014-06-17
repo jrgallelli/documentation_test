@@ -23,6 +23,8 @@ This example API documentation page was created with [Slate](http://github.com/t
 
 # Test
 
+# Test 2
+
 # Authentication
 
 > To authorize, use this code:
