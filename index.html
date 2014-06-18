@@ -158,15 +158,161 @@ curl -X POST --max-redirs 0 \
 <li>Payload: </li>
 </ul></li>
 </ul>
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Cache-Control</span><span class="p">:</span> <span class="s">no-store</span>
+<span class="na">Pragma</span><span class="p">:</span> <span class="s">no-cache</span>
 
-<p><code class="prettyprint">HTTP/1.1 200 OK</code>
-<code class="prettyprint">Content-Type: application/json</code>
-<code class="prettyprint">Cache-Control: no-store</code>
-<code class="prettyprint">Pragma: no-cache</code>
-`<code class="prettyprint">
-</code>{<code class="prettyprint">
-</code>    &ldquo;code&rdquo;: &ldquo;someBase64AuthCode&rdquo;<code class="prettyprint">
-</code>}`</p>
+<span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"someBase64AuthCode"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>Here is what happens in this step:</p>
+
+<ul>
+<li>The user is redirected to the identity portal.</li>
+<li>The user can sign-in, sign-up or silent sign-in with cookie in the identity portal.</li>
+<li>Then the auth server will then issue an authorization code.</li>
+<li>The auth server will redirect the client to the specified redirect_uri with the authorization code in the query string.</li>
+</ul>
+
+<p>To perform silent sign-in without redirecting the whole page, the client can always perform POST /authorize with prompt=none first to know whether the user is signed in or not. In the OAuth 2.0 standard, the /authorize endpoint can take a query parameter: prompt=none. When this is specified, the user will not be redirected to the login html. If the silent sign-in is applicable with the cookie, the user is signed in directly. Otherwise the server redirects back with an error in query string.</p>
+
+<p>There are some more details on how to handle the silent sign-in and how to login without redirecting out to another page are covered in TBD section. We will ignore them here. TBD: the client should wrap these steps to a client SDK?</p>
+
+<p>As a successful result of this step, the client can get the authorization code through either query string or json. The authorization code is effective for a short period.</p>
+
+<h2 id="get-the-oauth-access-token">Get the OAuth Access Token</h2>
+
+<p>The client can get the access token base using the authorization code plus the client secret.</p>
+<pre class="highlight shell">curl -X POST <span class="se">\</span>
+     -H <span class="s2">"Authorization: Basic dGVzdF9maXJzdF9wYXJ0eV9jbGllbnQ6d2Vha0NsaWVudFNlY3JldDEyMw=="</span> <span class="se">\</span>
+     -H <span class="s2">"Content-Type: application/x-www-form-urlencoded"</span> <span class="se">\</span>
+     <span class="s2">"</span><span class="nv">$baseUri</span><span class="s2">/oauth2/token"</span> <span class="se">\</span>
+     -d <span class="s2">"redirect_uri=http://localhost/some_sample_page&amp;grant_type=authorization_code&amp;code=someBase64AuthCode"</span>
+</pre>
+
+<p>In the curl command:</p>
+
+<ul>
+<li>The Authorization: Basic header contains the base 64 encoded client_id:client_secret pair.</li>
+<li>The redirect_uri must be the same as the one used in the initial /authorize call.</li>
+<li>The grant_type must be authorization_code.</li>
+<li>The code is the authorization code returned in the first step.</li>
+</ul>
+
+<p>The response will be:</p>
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Cache-Control</span><span class="p">:</span> <span class="s">no-store</span>
+<span class="na">Pragma</span><span class="p">:</span> <span class="s">no-cache</span>
+
+<span class="p">{</span><span class="w">
+    </span><span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"someBase64AccessToken"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expires_in"</span><span class="p">:</span><span class="mi">3600</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
+
+<p>The &ldquo;expires_in&rdquo; in the response indicates that the access token expires in 1 hour. This is configurable per client through the server-side policy. When the access token is about to expire, the client can use silent sign-in in javascript to get a new access token.Some notes on the client id type and the client secret. The client secret used by client&rsquo;s single-page applications should be considered insecure. They can be stolen and used to create a different web application. For such client IDs, they cannot have any permission that requires a trusted caller. For example, they cannot call fulfillment APIs directly. They must call place order and the server can make the fulfillment for them. In these scenarios, having the client secret here is just to follow the OAuth protocol. For third-party server, they may really store and use the access token only from their server. In that case, the client secret will never show in their client application.</p>
+
+<p>The access token can be used to call any APIs allowed by the user signed in. For example, the access token can be used to get the user profile of the signed in user. Or it can be used to update user profile of the signed in user. But it cannot be used to update the user profile of an irrelevant user. There can be special rules in the APIs. They are defined in the API docs.</p>
+
+<h2 id="call-the-api">Call the API</h2>
+
+<p>After getting the access token, you can add the header &ldquo;Authorization: Bearer <accessToken>&rdquo; to call the APIs. The APIs needs to be in the scope of the access token. Otherwise 401 will be returned. If the token is revoked or expired, 401 will also be returned. The application needs to be prepared to handle 401 error and try sign-in again anywhere.</p>
+
+<p>For example, to get the user, the client can call:</p>
+<pre class="highlight shell">curl -X GET -H <span class="s2">"Authorization: Bearer someBase64AccessToken"</span> <span class="s2">"</span><span class="nv">$baseUri</span><span class="s2">/v1/users/6B54FFB83C9F"</span>
+</pre>
+
+<p>The response will be:</p>
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Cache-Control</span><span class="p">:</span> <span class="s">no-store</span>
+<span class="na">Pragma</span><span class="p">:</span> <span class="s">no-cache</span>
+
+<span class="p">{</span><span class="w">
+</span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"liangfuxia"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"preferredLocale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"preferredTimeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UTC+08:00"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"isAnonymous"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/addresses/6C54FEB83D9F "</span><span class="p">,</span><span class="w">
+</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6C54FEB83D9F"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">],</span><span class="w">
+</span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/phones/3B54BFE43C9F"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3B54BFE43C9F"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">],</span><span class="w">
+</span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/emails/6B54EEB43D6F"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6B54EEB43D6F"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">],</span><span class="w">
+</span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John H Smith"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"givenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"middleName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"familyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"nickname"</span><span class="p">:</span><span class="s2">"SmithHoney"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1993-01-01"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"futureExpansion"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+</span><span class="s2">"rev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-k930dkd03kdk3k3k5"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-01-01T01:32:53Z"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-01-01T01:32:53Z"</span><span class="p">,</span><span class="w">
+</span><span class="s2">"groupMemberships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/groups?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/devices?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"authenticators"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/authenticators?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"tosAgreements"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/tos-agreements"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/credentials"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"credentialAttempts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/credential-attempts?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"optIns"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/opt-ins?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"securityQuestions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/security-questions"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"securityQuestionAttempts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/security-question-attempts"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"paymentInstruments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/payment-instruments?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/orders?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"carts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/carts"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="s2">"entitlements"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/entitlements?userId=6B54FFB83C9F"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 
       </div>
       <div class="dark-box">
