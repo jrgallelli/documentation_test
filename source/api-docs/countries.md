@@ -38,6 +38,27 @@ http://localhost:8080/v1/countries
 
 ## GET /countries/{id}
 
+> This command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Isis",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
+
 This endpoint gets a specific country.
 
 ### HTTP Request
@@ -66,6 +87,24 @@ Parameter | Type | Description
 defaultCurrencyId | string | Filter country by defaultCurrencyId
 cursor | string | The paging cursor of the search result. Used in the "next" field in results to fetch next page.
 count | integer | ￼￼The page size of the search result.
+
+## PUT /countries/{id}
+
+Updates the country.
+
+<aside class="warning">Internal use only.</aside>
+
+## POST /countries
+
+Creates a new country.
+
+<aside class="warning">Internal use only.</aside>
+
+## DELETE /countries/{id}
+
+Deletes a country.
+
+<aside class="warning">Internal use only.</aside>
 
 # Authentication
 
