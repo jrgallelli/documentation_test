@@ -129,6 +129,14 @@ You can start with the following test client ID for sandbox environment while ap
 
 <p>Note: This section assumes the user login portal is already available. How to write a login portal is covered in TBD.</p>
 
+<h2 id="sign-in-the-user">Sign-in the User</h2>
+
+<p>Let the user sign-in and get the OAuth authorization code.
+<code class="prettyprint">bash
+curl -X POST --max-redirs 0 \
+     &quot;$baseUri/oauth2/authorize?client_id=test_first_party_client&amp;redirect_uri=http://localhost/some_sample_page&amp;response_type=code&quot;
+</code></p>
+
       </div>
       <div class="dark-box">
       </div>
