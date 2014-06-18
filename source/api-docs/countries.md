@@ -13,15 +13,23 @@ search: true
 published: true
 ---
 
-# Introduction
+# Country
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+The country resource provides metadata for each country.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Test
+Field | Type | Description
+---------- | ---------------- | --------------------------------
+self | Country | The link of the country resource
+countryCode | string | The country code of the country resource. It equals to self.id
+defaultLocale | string | The locale that the country should use by default
+defaultCurrency | string | The currency that the country should use by default
+subCountries | map string,LocalizeKey | JSON object that maps from a code for the sub country (state, province, etc.) to a JSON object that contains the localization keys for the sub country's short and long names,
+supportedLocales | array string | Array for supported locales to the locales appropriate for this country
+localeKeys | LocalizeKey | Localizable properties and the corresponding key value to lookup in translation service.
+futureExpansion | map string, any | Optional. Used to add properties between major API revisions. In next major API version, all these properties will be refactored into the main body and futureExpansion will again be empty.
+rev | string | An opaque string that represents the state of the resource. Used for optimistic concurrency control.
+createdTime | string | The created datetime of the resource - must be ISO 8601.
+updatedTime | string | he updated datetime of the resource - must be ISO 8601.
 
 # Test 2
 
