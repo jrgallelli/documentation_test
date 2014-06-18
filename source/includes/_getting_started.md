@@ -52,6 +52,7 @@ curl -X POST --max-redirs 0 \
 **Note**: /authorize is not a typical REST API according to OAuth protocol.
 
 In the curl command:
+
 * $baseUri should be replaced with the URL of your target environment. For sandboxing environment, the value is https://apis.sandbox.silkcloud.com/
 * The client_id is specified in the request. You will need to use the client secret in of the specified client_id in order to get the access token.
 * The redirect_uri in the request determines how the auth flow will respond to you when then authorization flow has finished. The browser will redirect to the redirect_uri when the flow finishes, with the auth code in the query string. For example:
