@@ -21,7 +21,5 @@ Welcome to the SilkCloud Commerce Platform.
 Here are the resources supported by SilkCloud.
 
 - [Countries](api-docs/countries.html)
-
-## Countries
-## [Countries](api-docs/countries.html)
-
+- [Currencies](api-docs/currencies.html)
+- [Locales](api-docs/locales.html)
