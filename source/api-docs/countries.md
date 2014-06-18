@@ -31,7 +31,41 @@ rev | string | An opaque string that represents the state of the resource. Used 
 createdTime | string | The created datetime of the resource - must be ISO 8601.
 updatedTime | string | he updated datetime of the resource - must be ISO 8601.
 
-# Test 2
+# Sample URI
+http://localhost:8080/v1/countries
+
+# Supported Methods
+
+## GET /countries/{id}
+
+This endpoint gets a specific country.
+
+### HTTP Request
+
+`GET http://localhost:8080/v1/countries/{id}`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include_cats | false | If set to true, the result will also include cats.
+available | true | If set to false, the result will include kittens that have already been adopted.
+
+## GET /countries
+
+This endpoint lists all of the countries.
+
+### HTTP Request
+
+`GET http://localhost:8080/v1/countries`
+
+### Query Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+defaultCurrencyId | string | Filter country by defaultCurrencyId
+cursor | string | The paging cursor of the search result. Used in the "next" field in results to fetch next page.
+count | integer | ￼￼The page size of the search result.
 
 # Authentication
 
