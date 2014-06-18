@@ -10,6 +10,7 @@ There are two main environments in the commerce system:
 To get started, you can use Sandbox Environment. The URLs for the environments are listed below:
 
 Environment | URL
+-- | --
 Sandbox | TBD https://apis.sandbox.silkcloud.com/
 Production | TBD https://apis.silkcloud.com/  
 
@@ -19,6 +20,7 @@ The commerce platform uses the OAuth 2.0 as the authorization protocol. In OAuth
 You can start with the following test client ID for sandbox environment while applying for your new client ID. This test client ID has all normal permissions to all APIs. After obtaining the client ID for your application, please switch to validate the permissions you get can still make the calls.
 
 Test Client ID | Client Secret
+-- | --
 test_csr | weakClientSecret123
 test_first_party_backend | weakClientSecret123
 test_first_party_client | weakClientSecret123
