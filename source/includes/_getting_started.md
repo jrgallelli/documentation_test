@@ -10,7 +10,7 @@ There are two main environments in the commerce system:
 To get started, you can use Sandbox Environment. The URLs for the environments are listed below:
 
 Environment | URL
--- | --
+------------ | ---------------
 Sandbox | TBD https://apis.sandbox.silkcloud.com/
 Production | TBD https://apis.silkcloud.com/  
 
