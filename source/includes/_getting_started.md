@@ -48,3 +48,25 @@ Let the user sign-in and get the OAuth authorization code.
 curl -X POST --max-redirs 0 \
      "$baseUri/oauth2/authorize?client_id=test_first_party_client&redirect_uri=http://localhost/some_sample_page&response_type=code"
 `
+
+**Note**: /authorize is not a typical REST API according to OAuth protocol.
+
+In the curl command:
+* $baseUri should be replaced with the URL of your target environment. For sandboxing environment, the value is https://apis.sandbox.silkcloud.com/
+* The client_id is specified in the request. You will need to use the client secret in of the specified client_id in order to get the access token.
+* The redirect_uri in the request determines how the auth flow will respond to you when then authorization flow has finished. The browser will redirect to the redirect_uri when the flow finishes, with the auth code in the query string. For example:
+  * Response Code: 302
+  * Location: `http://localhost/some_sample_page?code=someBase64AuthCode`
+* A special redirect_uri can be specified to get a json object (maybe after some 302 redirects). For example:
+  * Response Code: 200
+  * Payload: 
+`
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+Pragma: no-cache
+ 
+{
+    "code": "someBase64AuthCode"
+}
+`
