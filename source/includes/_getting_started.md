@@ -62,11 +62,12 @@ In the curl command:
   * Response Code: 200
   * Payload: 
 
-`HTTP/1.1 200 OK 
-`Content-Type: application/json
-`Cache-Control: no-store
-`Pragma: no-cache
-` 
-`{
-`    "code": "someBase64AuthCode"
-`}
+`HTTP/1.1 200 OK `
+`Content-Type: application/json`
+`Cache-Control: no-store`
+`Pragma: no-cache`
+`` 
+`{`
+`    "code": "someBase64AuthCode"`
+`}`
+
