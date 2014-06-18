@@ -132,8 +132,8 @@ You can start with the following test client ID for sandbox environment while ap
 <h2 id="sign-in-the-user">Sign-in the User</h2>
 
 <p>Let the user sign-in and get the OAuth authorization code.</p>
-<pre class="highlight shell">curl -X POST --max-redirs 0 <span class="se">\</span>
-     <span class="s2">"</span><span class="nv">$baseUri</span><span class="s2">/oauth2/authorize?client_id=test_first_party_client&amp;redirect_uri=http://localhost/some_sample_page&amp;response_type=code"</span>
+<pre class="highlight plaintext">curl -X POST --max-redirs 0 \
+     "$baseUri/oauth2/authorize?client_id=test_first_party_client&amp;redirect_uri=http://localhost/some_sample_page&amp;response_type=code"
 </pre>
 
       </div>
