@@ -110,6 +110,27 @@
 
 <h2 id="get-/countries/{id}">GET /countries/{id}</h2>
 
+<blockquote>
+<p>This command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre>
+
 <p>This endpoint gets a specific country.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -170,6 +191,24 @@
 <td>￼￼The page size of the search result.</td>
 </tr>
 </tbody></table>
+
+<h2 id="put-/countries/{id}">PUT /countries/{id}</h2>
+
+<p>Updates the country.</p>
+
+<p><aside class="warning">Internal use only.</aside></p>
+
+<h2 id="post-/countries">POST /countries</h2>
+
+<p>Creates a new country.</p>
+
+<p><aside class="warning">Internal use only.</aside></p>
+
+<h2 id="delete-/countries/{id}">DELETE /countries/{id}</h2>
+
+<p>Deletes a country.</p>
+
+<p><aside class="warning">Internal use only.</aside></p>
 
 <h1 id="authentication">Authentication</h1>
 
