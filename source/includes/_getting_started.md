@@ -61,6 +61,7 @@ In the curl command:
 * A special redirect_uri can be specified to get a json object (maybe after some 302 redirects). For example:
   * Response Code: 200
   * Payload: 
+
 `
 HTTP/1.1 200 OK
 Content-Type: application/json
