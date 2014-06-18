@@ -45,63 +45,47 @@
 <li><a href="api-docs/locales.html">Locales</a></li>
 </ul>
 
-          <h1 id="errors">Errors</h1>
+          <h1 id="getting-started">Getting Started</h1>
 
-<p><aside class="notice">This error section is stored in a separate file in <code class="prettyprint">includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the <code class="prettyprint">includes</code> folder and add them to the top of your <code class="prettyprint">index.md</code>&rsquo;s frontmatter. Files are included in the order listed.</aside></p>
+<h2 id="determine-the-environment">Determine the Environment</h2>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>There are two main environments in the commerce system:</p>
 
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slown down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
-</tr>
-</tbody></table>
+<ul>
+<li>Sandbox Environment. This environment is for integration testing. Testers can try the APIs in the sandbox environment. No real transactions will happen by calling to the sandbox environment. The data in the sandbox environment is fake/mock data.</li>
+<li>Production Environment. This environment is for the production. Any call to this environment is a real transaction.</li>
+</ul>
+
+<p>To get started, you can use Sandbox Environment. The URLs for the environments are listed below:</p>
+
+<p>Environment | URL
+Sandbox | TBD https://apis.sandbox.silkcloud.com/
+Production | TBD https://apis.silkcloud.com/  </p>
+
+<h2 id="obtaining-the-app-client">Obtaining the App Client</h2>
+
+<p>The commerce platform uses the OAuth 2.0 as the authorization protocol. In OAuth 2.0, any code calling the APIs are called a client. Clients must be registered first in order to make an API call. After registering, the client gets back their OAuth client ID and client secret. (TBD: Identify client using certificate)
+You can start with the following test client ID for sandbox environment while applying for your new client ID. This test client ID has all normal permissions to all APIs. After obtaining the client ID for your application, please switch to validate the permissions you get can still make the calls.</p>
+
+<p>Test Client ID | Client Secret
+test_csr | weakClientSecret123
+test_first_party_backend | weakClientSecret123
+test_first_party_client | weakClientSecret123
+test_first_party_server | weakClientSecret123
+test_super_client | weakClientSecret123
+test_third_party_backend | weakClientSecret123
+test_third_party_client | weakClientSecret123
+test_third_party_server | weakClientSecret123</p>
+
+<p>The difference of first-party vs third-party is TBD. We’ll first let first-party call almost all APIs to enable implementing the single-page frontend web applications.</p>
+
+<p>To get your own application client ID, refer to the following section: TBD</p>
+
+<h2 id="making-api-calls">Making API Calls</h2>
+
+<p>In the getting started section, we will demonstrate how to get the user information. We will use the test_first_party_client as the OAuth client ID.</p>
+
+<p>Note: This section assumes the user login portal is already available. How to write a login portal is covered in TBD.</p>
 
       </div>
       <div class="dark-box">
