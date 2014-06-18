@@ -39,3 +39,11 @@ To get your own application client ID, refer to the following section: TBD
 In the getting started section, we will demonstrate how to get the user information. We will use the test_first_party_client as the OAuth client ID.
 
 Note: This section assumes the user login portal is already available. How to write a login portal is covered in TBD.
+
+## Sign-in the User
+
+Let the user sign-in and get the OAuth authorization code.
+```bash
+curl -X POST --max-redirs 0 \
+     "$baseUri/oauth2/authorize?client_id=test_first_party_client&redirect_uri=http://localhost/some_sample_page&response_type=code"
+```
