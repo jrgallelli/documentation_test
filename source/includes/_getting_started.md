@@ -44,7 +44,7 @@ Note: This section assumes the user login portal is already available. How to wr
 
 Let the user sign-in and get the OAuth authorization code.
 
-```bash
+```
 curl -X POST --max-redirs 0 \
      "$baseUri/oauth2/authorize?client_id=test_first_party_client&redirect_uri=http://localhost/some_sample_page&response_type=code"
 ```
