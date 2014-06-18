@@ -8,7 +8,7 @@ search: true
 published: true
 ---
 
-# Country
+# Locale
 
 The country resource provides metadata for each country.
 
