@@ -18,4 +18,10 @@ Welcome to the SilkCloud Commerce Platform.
 
 # API Reference
 
-Here are the resources supported by SilkCloud
+Here are the resources supported by SilkCloud.
+
+- [Countries](api-docs/countries.html)
+
+## Countries
+## [Countries](api-docs/countries.html)
+
