@@ -7,6 +7,7 @@ includes:
   - getting_started
 search: true
 published: true
+layout: standard
 ---
 
 # Introduction
