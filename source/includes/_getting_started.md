@@ -133,7 +133,7 @@ curl -X GET -H "Authorization: Bearer someBase64AccessToken" "$baseUri/v1/users/
 
 The response will be:
 
-```http
+```
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
