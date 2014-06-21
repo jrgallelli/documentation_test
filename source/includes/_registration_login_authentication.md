@@ -145,4 +145,88 @@ HTTP/1.1 400 Bad Request
  }
  ```
  
- ### Authentication request triggers a login view
+### Authentication request triggers a login view 
+
+#### Sample Request
+
+```http
+POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
+ Content-Type: application/json
+ Accept: application/json
+ Host: auth.silkcloud.com
+  {
+ }
+ ```
+ 
+ #### Sample Response
+ 
+ ```http
+ HTTP/1.1 200 Ok
+ Content-Type: application/json
+ Cache-Control: no-store
+ Pragma: no-cache
+  {
+  "view": "login",
+  "model": {
+ "clientId": "s6BhdRkqt3",
+ "locales": "en_US",
+ "theme": "default",
+ ...
+  }
+ }
+ ```
+ 
+ ### Browser collects user login credential and request authentication
+ 
+ * GOOD response: Server response with requirement to gather user consent ("consent" view) 
+ * BAD response: login fails due to invalid username or password.
+ 
+ #### Sample Request
+ ```http
+ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
+ Content-Type: application/json
+ Accept: application/json
+ Host: auth.silkcloud.com
+ 
+ {
+ "event": "next"
+ "model": {
+  "username": "user1@silkcloud.com"
+  "password": "password"
+ }
+ }
+ ```
+ 
+ #### Sample Response (GOOD)
+ ```http
+ HTTP/1.1 200 Ok
+ Content-Type: application/json
+ Cache-Control: no-store
+ Pragma: no-cache
+ 
+ {
+  "view": "consent",
+  "model": {
+ "clientId": "s6BhdRkqt3",
+ "locales": "en_US",
+ "theme": "default",
+ "scopes": "email profile ..."
+ ...
+  }
+ }
+ ```
+ 
+ #### Sample Response (BAD)
+ ```http
+ HTTP/1.1 400 Bad Request
+ Content-Type: application/json
+ Cache-Control: no-store
+ Pragma: no-cache
+ 
+ {
+  "code": "10123",
+  "message": "username or password is invalid",
+ }
+ ```
+ 
+ 
