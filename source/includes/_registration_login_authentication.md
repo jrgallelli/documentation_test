@@ -73,7 +73,7 @@ OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is
 
 ### Authentication request triggers a view to display registration view with reCAPTCHA challenge
 
-Sample Request
+#### Sample Request
 
 ```http
 POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
@@ -85,7 +85,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  }
  ```
  
- Sample Response
+#### Sample Response
  
  ```http
  HTTP/1.1 200 Ok
@@ -105,7 +105,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
 ```
 ### User registration information collected and sent to the Auth server
 
-Sample Request
+#### Sample Request
 
 ```http
 POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
@@ -124,14 +124,14 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  }
 ```
 
-Sample Response (GOOD)
+#### Sample Response (GOOD)
 
 ```http
 HTTP/1.1 302 Found
  Location: https://auth.silkcloud.com/connect/authorize?fs=oEYLTZnI0N
 ```
 
-Sample Responese (BAD)
+#### Sample Responese (BAD)
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -158,7 +158,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  }
  ```
  
- #### Sample Response
+#### Sample Response
  
  ```http
  HTTP/1.1 200 Ok
@@ -176,13 +176,13 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  }
  ```
  
- ### Browser collects user login credential and request authentication
+### Browser collects user login credential and request authentication
  
  * GOOD response: Server response with requirement to gather user consent ("consent" view) 
  * BAD response: login fails due to invalid username or password.
  
- #### Sample Request
- ```http
+#### Sample Request
+```http
  POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  Content-Type: application/json
  Accept: application/json
@@ -195,10 +195,10 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
   "password": "password"
  }
  }
- ```
+```
  
- #### Sample Response (GOOD)
- ```http
+#### Sample Response (GOOD)
+```http
  HTTP/1.1 200 Ok
  Content-Type: application/json
  Cache-Control: no-store
@@ -214,10 +214,10 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  ...
   }
  }
- ```
+```
  
- #### Sample Response (BAD)
- ```http
+#### Sample Response (BAD)
+```http
  HTTP/1.1 400 Bad Request
  Content-Type: application/json
  Cache-Control: no-store
@@ -227,6 +227,6 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
   "code": "10123",
   "message": "username or password is invalid",
  }
- ```
+```
  
  
