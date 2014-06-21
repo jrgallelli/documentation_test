@@ -87,7 +87,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  
 #### Sample Response
  
- ```http
+```http
  HTTP/1.1 200 Ok
  Content-Type: application/json
  Cache-Control: no-store
@@ -160,7 +160,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  
 #### Sample Response
  
- ```http
+```http
  HTTP/1.1 200 Ok
  Content-Type: application/json
  Cache-Control: no-store
@@ -174,7 +174,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  ...
   }
  }
- ```
+```
  
 ### Browser collects user login credential and request authentication
  
