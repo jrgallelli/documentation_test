@@ -6,6 +6,7 @@ toc_footers:
 includes: 
   - getting_started
   - domain_object_model
+  - registration_login_authentication
 search: true
 published: true
 layout: standard
