@@ -26,12 +26,12 @@ rev | string | An opaque string that represents the state of the resource. Used 
 createdTime | string | The created datetime of the resource - must be ISO 8601.
 updatedTime | string | he updated datetime of the resource - must be ISO 8601.
 
-# Sample URI
+## Sample URI
 http://localhost:8080/v1/countries
 
-# Supported Methods
+## Supported Methods
 
-## GET /countries/{id}
+### GET /countries/{id}
 
 > This command returns JSON structured like this:
 
@@ -71,25 +71,25 @@ http://localhost:8080/v1/countries
 
 This endpoint gets a specific country.
 
-### HTTP Request
+#### HTTP Request
 
 `GET http://localhost:8080/v1/countries/{id}`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter | Type | Description
 --------- | ------- | -----------
 id | string | The id of country
 
-## GET /countries
+### GET /countries
 
 This endpoint lists all of the countries.
 
-### HTTP Request
+#### HTTP Request
 
 `GET http://localhost:8080/v1/countries`
 
-### Query Parameters
+#### Query Parameters
 
 Parameter | Type | Description
 --------- | ------- | -----------
@@ -97,19 +97,19 @@ defaultCurrencyId | string | Filter country by defaultCurrencyId
 cursor | string | The paging cursor of the search result. Used in the "next" field in results to fetch next page.
 count | integer | ￼￼The page size of the search result.
 
-## PUT /countries/{id}
+### PUT /countries/{id}
 
 Updates the country.
 
 <aside class="warning">Internal use only.</aside>
 
-## POST /countries
+### POST /countries
 
 Creates a new country.
 
 <aside class="warning">Internal use only.</aside>
 
-## DELETE /countries/{id}
+### DELETE /countries/{id}
 
 Deletes a country.
 
