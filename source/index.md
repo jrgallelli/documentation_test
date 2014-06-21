@@ -5,6 +5,7 @@ toc_footers:
   - "<a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>"
 includes: 
   - getting_started
+  - domain_object_model
 search: true
 published: true
 layout: standard
