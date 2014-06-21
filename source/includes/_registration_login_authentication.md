@@ -45,7 +45,7 @@ Another scenario that requires access right authentication is when user attempts
 Authentication for third party server to obtain access token to platform APIs.
 OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is implemented.
 
-## End to Ennd Flows
+## End to End Flows
 
 ### User registration using a browser (Account creation)
 
@@ -68,3 +68,81 @@ OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is
 1. Step 2-4 is repeated, until the Auth Server returns 302.
 1. The login page redirects back to the Auth Server.
 1. The Auth Server finally redirects back to the application's callback URL
+
+## Sample Code
+
+### Authentication request triggers a view to display registration view with reCAPTCHA challenge
+
+Sample Request
+
+```http
+POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
+ Content-Type: application/json
+ Accept: application/json
+ Host: auth.silkcloud.com
+ 
+ {
+ }
+ ```
+ 
+ Sample Response
+ 
+ ```http
+ HTTP/1.1 200 Ok
+ Content-Type: application/json
+ Cache-Control: no-store
+ Pragma: no-cache
+ {
+  "view": "register",
+  "model": {
+    "clientId": "s6BhdRkqt3",
+    "locales": "en_US",
+    "theme": "default",
+    "recaptchaImageUrl": "http://blablabla"
+    ...
+  }
+ }
+```
+### User registration information collected and sent to the Auth server
+
+Sample Request
+
+```http
+POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
+ Content-Type: application/json
+ Accept: application/json
+ Host: auth.silkcloud.com
+ 
+ {
+ "event": "next"
+ "model": {
+  "username": "user1@silkcloud.com",
+  "password": "password",
+  "dob": "…",
+  …
+ }
+ }
+```
+
+Sample Response (GOOD)
+
+```http
+HTTP/1.1 302 Found
+ Location: https://auth.silkcloud.com/connect/authorize?fs=oEYLTZnI0N
+```
+
+Sample Responese (BAD)
+
+```http
+HTTP/1.1 400 Bad Request
+ Content-Type: application/json
+ Cache-Control: no-store
+ Pragma: no-cache
+ 
+ {
+  "code": "10123",
+  "message": "some error happens",
+ }
+ ```
+ 
+ ### Authentication request triggers a login view
