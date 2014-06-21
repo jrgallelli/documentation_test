@@ -44,10 +44,10 @@ Note: This section assumes the user login portal is already available. How to wr
 
 Let the user sign-in and get the OAuth authorization code.
 
-`
+```bash
 curl -X POST --max-redirs 0 \
      "$baseUri/oauth2/authorize?client_id=test_first_party_client&redirect_uri=http://localhost/some_sample_page&response_type=code"
-`
+```
 
 **Note**: /authorize is not a typical REST API according to OAuth protocol.
 
@@ -133,90 +133,90 @@ curl -X GET -H "Authorization: Bearer someBase64AccessToken" "$baseUri/v1/users/
 
 The response will be:
 
-```
+```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 Cache-Control: no-store
 Pragma: no-cache
  
 {
-"self": {
-"href": "/v1/users/6B54FFB83C9F",
-"id": "6B54FFB83C9F"
-},
-"username": "liangfuxia",
-"preferredLocale": "en_US",
-"preferredTimeZone": "UTC+08:00",
-"isAnonymous": false,
-"addresses": [
-{
-"href": "/v1/addresses/6C54FEB83D9F ",
-"id": "6C54FEB83D9F"
-}
-],
-"phones": [
-{
-"href": "/v1/phones/3B54BFE43C9F",
-"id": "3B54BFE43C9F"
-}
-],
-"emails": [
-{
-"href": "/v1/emails/6B54EEB43D6F",
-"id": "6B54EEB43D6F"
-}
-],
-"status": "ACTIVE",
-"fullName": "John H Smith",
-"givenName": "John",
-"middleName": "H",
-"familyName": "Smith",
-"nickname":"SmithHoney",
-"birthday": "1993-01-01",
-"gender":"MALE",
-"futureExpansion": {},
-"rev": "1-k930dkd03kdk3k3k5",
-"createdTime": "2013-01-01T01:32:53Z",
-"updatedTime": "2013-01-01T01:32:53Z",
-"groupMemberships": {
-"href": "/v1/groups?userId=6B54FFB83C9F"
-},
-"devices": {
-"href": "/v1/devices?userId=6B54FFB83C9F"
-},
-"authenticators": {
-"href": "/v1/authenticators?userId=6B54FFB83C9F"
-},
-"tosAgreements": {
-"href": "/v1/users/6B54FFB83C9F/tos-agreements"
-},
-"credentials": {
-"href": "/v1/users/6B54FFB83C9F/credentials"
-},
-"credentialAttempts": {
-"href": "/v1/credential-attempts?userId=6B54FFB83C9F"
-},
-"optIns": {
-"href": "/v1/opt-ins?userId=6B54FFB83C9F"
-},
-"securityQuestions": {
-"href": "/v1/users/6B54FFB83C9F/security-questions"
-},
-"securityQuestionAttempts": {
-"href": "/v1/users/6B54FFB83C9F/security-question-attempts"
-},
-"paymentInstruments": {
-"href": "/v1/payment-instruments?userId=6B54FFB83C9F"
-},
-"orders": {
-"href": "/v1/orders?userId=6B54FFB83C9F"
-},
-"carts": {
-"href": "/v1/users/6B54FFB83C9F/carts"
-},
-"entitlements": {
-"href": "/v1/entitlements?userId=6B54FFB83C9F"
-}
+  "self": {
+    "href": "/v1/users/6B54FFB83C9F",
+    "id": "6B54FFB83C9F"
+  },
+  "username": "liangfuxia",
+  "preferredLocale": "en_US",
+  "preferredTimeZone": "UTC+08:00",
+  "isAnonymous": false,
+  "addresses": [
+  {
+    "href": "/v1/addresses/6C54FEB83D9F ",
+    "id": "6C54FEB83D9F"
+  }
+  ],
+  "phones": [
+  {
+    "href": "/v1/phones/3B54BFE43C9F",
+    "id": "3B54BFE43C9F"
+  }
+  ],
+  "emails": [
+  {
+    "href": "/v1/emails/6B54EEB43D6F",
+    "id": "6B54EEB43D6F"
+  }
+  ],
+  "status": "ACTIVE",
+  "fullName": "John H Smith",
+  "givenName": "John",
+  "middleName": "H",
+  "familyName": "Smith",
+  "nickname":"SmithHoney",
+  "birthday": "1993-01-01",
+  "gender":"MALE",
+  "futureExpansion": {},
+  "rev": "1-k930dkd03kdk3k3k5",
+  "createdTime": "2013-01-01T01:32:53Z",
+  "updatedTime": "2013-01-01T01:32:53Z",
+  "groupMemberships": {
+    "href": "/v1/groups?userId=6B54FFB83C9F"
+  },
+  "devices": {
+    "href": "/v1/devices?userId=6B54FFB83C9F"
+  },
+  "authenticators": {
+    "href": "/v1/authenticators?userId=6B54FFB83C9F"
+  },
+  "tosAgreements": {
+    "href": "/v1/users/6B54FFB83C9F/tos-agreements"
+  },
+  "credentials": {
+    "href": "/v1/users/6B54FFB83C9F/credentials"
+  },
+  "credentialAttempts": {
+    "href": "/v1/credential-attempts?userId=6B54FFB83C9F"
+  },
+  "optIns": {
+    "href": "/v1/opt-ins?userId=6B54FFB83C9F"
+  },
+  "securityQuestions": {
+    "href": "/v1/users/6B54FFB83C9F/security-questions"
+  },
+  "securityQuestionAttempts": {
+    "href": "/v1/users/6B54FFB83C9F/security-question-attempts"
+  },
+  "paymentInstruments": {
+    "href": "/v1/payment-instruments?userId=6B54FFB83C9F"
+  },
+  "orders": {
+    "href": "/v1/orders?userId=6B54FFB83C9F"
+  },
+  "carts": {
+    "href": "/v1/users/6B54FFB83C9F/carts"
+  },
+  "entitlements": {
+    "href": "/v1/entitlements?userId=6B54FFB83C9F"
+  }
 }
 ```
 
