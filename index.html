@@ -132,11 +132,9 @@ You can start with the following test client ID for sandbox environment while ap
 <h2 id="sign-in-the-user">Sign-in the User</h2>
 
 <p>Let the user sign-in and get the OAuth authorization code.</p>
-
-<p><code class="prettyprint">
-curl -X POST --max-redirs 0 \
-     &quot;$baseUri/oauth2/authorize?client_id=test_first_party_client&amp;redirect_uri=http://localhost/some_sample_page&amp;response_type=code&quot;
-</code></p>
+<pre class="highlight shell">curl -X POST --max-redirs 0 <span class="se">\</span>
+     <span class="s2">"</span><span class="nv">$baseUri</span><span class="s2">/oauth2/authorize?client_id=test_first_party_client&amp;redirect_uri=http://localhost/some_sample_page&amp;response_type=code"</span>
+</pre>
 
 <p><strong>Note</strong>: /authorize is not a typical REST API according to OAuth protocol.</p>
 
@@ -228,91 +226,91 @@ curl -X POST --max-redirs 0 \
 </pre>
 
 <p>The response will be:</p>
-<pre class="highlight plaintext">HTTP/1.1 200 OK
-Content-Type: application/json
-Cache-Control: no-store
-Pragma: no-cache
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Cache-Control</span><span class="p">:</span> <span class="s">no-store</span>
+<span class="na">Pragma</span><span class="p">:</span> <span class="s">no-cache</span>
 
-{
-"self": {
-"href": "/v1/users/6B54FFB83C9F",
-"id": "6B54FFB83C9F"
-},
-"username": "liangfuxia",
-"preferredLocale": "en_US",
-"preferredTimeZone": "UTC+08:00",
-"isAnonymous": false,
-"addresses": [
-{
-"href": "/v1/addresses/6C54FEB83D9F ",
-"id": "6C54FEB83D9F"
-}
-],
-"phones": [
-{
-"href": "/v1/phones/3B54BFE43C9F",
-"id": "3B54BFE43C9F"
-}
-],
-"emails": [
-{
-"href": "/v1/emails/6B54EEB43D6F",
-"id": "6B54EEB43D6F"
-}
-],
-"status": "ACTIVE",
-"fullName": "John H Smith",
-"givenName": "John",
-"middleName": "H",
-"familyName": "Smith",
-"nickname":"SmithHoney",
-"birthday": "1993-01-01",
-"gender":"MALE",
-"futureExpansion": {},
-"rev": "1-k930dkd03kdk3k3k5",
-"createdTime": "2013-01-01T01:32:53Z",
-"updatedTime": "2013-01-01T01:32:53Z",
-"groupMemberships": {
-"href": "/v1/groups?userId=6B54FFB83C9F"
-},
-"devices": {
-"href": "/v1/devices?userId=6B54FFB83C9F"
-},
-"authenticators": {
-"href": "/v1/authenticators?userId=6B54FFB83C9F"
-},
-"tosAgreements": {
-"href": "/v1/users/6B54FFB83C9F/tos-agreements"
-},
-"credentials": {
-"href": "/v1/users/6B54FFB83C9F/credentials"
-},
-"credentialAttempts": {
-"href": "/v1/credential-attempts?userId=6B54FFB83C9F"
-},
-"optIns": {
-"href": "/v1/opt-ins?userId=6B54FFB83C9F"
-},
-"securityQuestions": {
-"href": "/v1/users/6B54FFB83C9F/security-questions"
-},
-"securityQuestionAttempts": {
-"href": "/v1/users/6B54FFB83C9F/security-question-attempts"
-},
-"paymentInstruments": {
-"href": "/v1/payment-instruments?userId=6B54FFB83C9F"
-},
-"orders": {
-"href": "/v1/orders?userId=6B54FFB83C9F"
-},
-"carts": {
-"href": "/v1/users/6B54FFB83C9F/carts"
-},
-"entitlements": {
-"href": "/v1/entitlements?userId=6B54FFB83C9F"
-}
-}
-</pre>
+<span class="p">{</span><span class="w">
+  </span><span class="s2">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"liangfuxia"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"preferredLocale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"preferredTimeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UTC+08:00"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"isAnonymous"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/addresses/6C54FEB83D9F "</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6C54FEB83D9F"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"phones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/phones/3B54BFE43C9F"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3B54BFE43C9F"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"emails"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/emails/6B54EEB43D6F"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6B54EEB43D6F"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John H Smith"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"givenName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"middleName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"familyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"nickname"</span><span class="p">:</span><span class="s2">"SmithHoney"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"birthday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1993-01-01"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"gender"</span><span class="p">:</span><span class="s2">"MALE"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"futureExpansion"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="s2">"rev"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-k930dkd03kdk3k3k5"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"createdTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-01-01T01:32:53Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updatedTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-01-01T01:32:53Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"groupMemberships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/groups?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/devices?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"authenticators"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/authenticators?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"tosAgreements"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/tos-agreements"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/credentials"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"credentialAttempts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/credential-attempts?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"optIns"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/opt-ins?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"securityQuestions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/security-questions"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"securityQuestionAttempts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/security-question-attempts"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"paymentInstruments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/payment-instruments?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/orders?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"carts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/users/6B54FFB83C9F/carts"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"entitlements"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/v1/entitlements?userId=6B54FFB83C9F"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre>
 
       </div>
       <div class="dark-box">
