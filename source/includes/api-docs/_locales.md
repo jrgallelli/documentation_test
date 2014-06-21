@@ -1,14 +1,4 @@
----
-title: API Reference
-language_tabs: 
-  - shell
-  - ruby
-  - python
-search: true
-published: true
----
-
-# Locale
+# Locale 
 
 The country resource provides metadata for each country.
 
@@ -26,10 +16,8 @@ rev | string | An opaque string that represents the state of the resource. Used 
 createdTime | string | The created datetime of the resource - must be ISO 8601.
 updatedTime | string | he updated datetime of the resource - must be ISO 8601.
 
-# Sample URI
+## Sample URI
 http://localhost:8080/v1/countries
-
-# Supported Methods
 
 ## GET /countries/{id}
 

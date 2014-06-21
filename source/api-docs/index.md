@@ -5,6 +5,8 @@ toc_footers:
   - "<a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>"
 includes: 
   - api-docs/countries 
+  - api-docs/currencies 
+  - api-docs/locales 
   - errors
 search: true
 published: true
