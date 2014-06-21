@@ -366,7 +366,7 @@ You can start with the following test client ID for sandbox environment while ap
 <p>Authentication for third party server to obtain access token to platform APIs.
 OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is implemented.</p>
 
-<h2 id="end-to-ennd-flows">End to Ennd Flows</h2>
+<h2 id="end-to-end-flows">End to End Flows</h2>
 
 <h3 id="user-registration-using-a-browser-(account-creation)">User registration using a browser (Account creation)</h3>
 
@@ -396,6 +396,75 @@ OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is
 <li>The login page redirects back to the Auth Server.</li>
 <li>The Auth Server finally redirects back to the application&rsquo;s callback URL</li>
 </ol>
+
+<h2 id="sample-code">Sample Code</h2>
+
+<h3 id="authentication-request-triggers-a-view-to-display-registration-view-with-recaptcha-challenge">Authentication request triggers a view to display registration view with reCAPTCHA challenge</h3>
+
+<p>Sample Request</p>
+<pre class="highlight http"><span class="nf">POST</span> <span class="nn">/connect/authorize?fs=oEYLTZnI0N</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="s"> Content-Type: application/json</span>
+<span class="s"> Accept: application/json</span>
+<span class="s"> Host: auth.silkcloud.com</span>
+
+ {
+ }
+</pre>
+
+<p>Sample Response</p>
+<pre class="highlight http"><span class="err"> </span><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">Ok</span>
+<span class="s"> Content-Type: application/json</span>
+<span class="s"> Cache-Control: no-store</span>
+<span class="s"> Pragma: no-cache</span>
+<span class="s"> {</span>
+<span class="s">  "view": "register",</span>
+<span class="s">  "model": {</span>
+<span class="s">    "clientId": "s6BhdRkqt3",</span>
+<span class="s">    "locales": "en_US",</span>
+<span class="s">    "theme": "default",</span>
+<span class="s">    "recaptchaImageUrl": "http://blablabla"</span>
+<span class="s">    ...</span>
+<span class="s">  }</span>
+<span class="s"> }</span>
+</pre>
+
+<h3 id="user-registration-information-collected-and-sent-to-the-auth-server">User registration information collected and sent to the Auth server</h3>
+
+<p>Sample Request</p>
+<pre class="highlight http"><span class="nf">POST</span> <span class="nn">/connect/authorize?fs=oEYLTZnI0N</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="s"> Content-Type: application/json</span>
+<span class="s"> Accept: application/json</span>
+<span class="s"> Host: auth.silkcloud.com</span>
+
+ {
+ "event": "next"
+ "model": {
+  "username": "user1@silkcloud.com",
+  "password": "password",
+  "dob": "…",
+  …
+ }
+ }
+</pre>
+
+<p>Sample Response (GOOD)</p>
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="s"> Location: https://auth.silkcloud.com/connect/authorize?fs=oEYLTZnI0N</span>
+</pre>
+
+<p>Sample Responese (BAD)</p>
+<pre class="highlight http"><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
+<span class="s"> Content-Type: application/json</span>
+<span class="s"> Cache-Control: no-store</span>
+<span class="s"> Pragma: no-cache</span>
+
+ {
+  "code": "10123",
+  "message": "some error happens",
+ }
+</pre>
+
+<p>### Authentication request triggers a login view</p>
 
       </div>
       <div class="dark-box">
