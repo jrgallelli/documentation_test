@@ -30,7 +30,7 @@ An offer can be associated with 0 to many offers, and 1 to many items. As a resu
 
 ![Offer Flow Diagram](offer_flow.png)
 
-### Create/Update and Publish an Item
+## Create/Update and Publish an Item
 
 Step 1. Developer creates an item
 
