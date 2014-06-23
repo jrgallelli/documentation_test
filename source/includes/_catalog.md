@@ -36,7 +36,7 @@ Step 1. Developer creates an item
 
 #### Sample Request
 
-```
+```http
 Method POST
 Uri http://api.silkcloud.com/items
 Body
@@ -67,7 +67,7 @@ Body
   
 #### Sample Response
   
-```
+```http
 Status Code 200
  
 Body
