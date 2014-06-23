@@ -543,6 +543,28 @@ OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is
  }
 </pre>
 
+          <h1 id="catalog-management-and-promotion">Catalog Management and Promotion</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Selling any product (physical goods, downloadable software, video, virtual goods, etc.) in a store involves two fundamental concepts: Item and Offer.</p>
+
+<h3 id="item:-what-to-sell">Item: what to sell</h3>
+
+<p>Item describes the contents and technical aspects of the product to be sold, such as app description, screen shoots, system requirement, platform, version number, etc.</p>
+
+<h3 id="offer:-how-to-sell">Offer: how to sell</h3>
+
+<p>After an item is created, an offer can be created to describe the marketing aspects of the product, such as prices, bundles, promotions, markets, etc.</p>
+
+<h3 id="catalog-reviews">Catalog Reviews</h3>
+
+<p>Before a product can be released to the public, rigorous reviews have to be performed by store administrators to ensure quality of the product.  Both items and offers need to go through the reviews.</p>
+
+<p>Following is the life cycle diagram of an item or offer object.  A developer or publisher creates a &ldquo;Draft&rdquo; and submits it to the store admin for  &ldquo;PendingReview&rdquo;.   Admin decides whether to approve or reject the item/offer.  Once the state becomes &ldquo;Approved&rdquo;, the object is ready to be sold. </p>
+
+<p><img alt="Offer State Diagram" src="images/offer_state.png" /></p>
+
       </div>
       <div class="dark-box">
       </div>
