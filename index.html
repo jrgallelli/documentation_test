@@ -646,18 +646,18 @@ Body
 <p>Step 2. Developer may update the item (the status of the item will stay as &ldquo;Design&rdquo;)</p>
 
 <h4 id="sample-request">Sample Request</h4>
-<pre class="highlight plaintext">Method PUT
+<pre class="highlight http"><span class="err">Method PUT
 
 Uri http://api.silkcloud.com/items/123
 
-Body
+Body 
+{
+   "name": "demo item 123",
+}
+</span></pre>
 
-        {
-            "name": "demo item 123",
-        }
-
-Sample response
-Status Code 200
+<h4 id="sample-response">Sample response</h4>
+<pre class="highlight http"><span class="err">Status Code 200
 
 Body
            {
@@ -691,9 +691,7 @@ Body
             "updatedTime": "2013-01-01T01:35:53Z",
             "updatedBy": {"href": "https://data.silkcloud.com/v1/users/3234", "id": "3234"}
         }
-
-
-</pre>
+</span></pre>
 
       </div>
       <div class="dark-box">
