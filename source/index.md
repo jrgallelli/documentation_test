@@ -7,6 +7,7 @@ includes:
   - getting_started
   - domain_object_model
   - registration_login_authentication
+  - catalog
 search: true
 published: true
 layout: standard
