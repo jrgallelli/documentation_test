@@ -106,18 +106,19 @@ Step 2. Developer may update the item (the status of the item will stay as "Desi
 
 #### Sample Request
 
-```
+```http
 Method PUT
  
 Uri http://api.silkcloud.com/items/123
  
-Body
+Body 
+{
+   "name": "demo item 123",
+}
+```
  
-        {
-            "name": "demo item 123",
-        }
- 
-Sample response
+#### Sample response
+```http
 Status Code 200
  
 Body
@@ -152,5 +153,7 @@ Body
             "updatedTime": "2013-01-01T01:35:53Z",
             "updatedBy": {"href": "https://data.silkcloud.com/v1/users/3234", "id": "3234"}
         }
+```
+
         
   
