@@ -83,7 +83,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  
  {
  }
- ```
+```
  
 #### Sample Response
  
@@ -143,7 +143,7 @@ HTTP/1.1 400 Bad Request
   "code": "10123",
   "message": "some error happens",
  }
- ```
+```
  
 ### Authentication request triggers a login view 
 
@@ -156,7 +156,7 @@ POST /connect/authorize?fs=oEYLTZnI0N HTTP/1.1
  Host: auth.silkcloud.com
   {
  }
- ```
+```
  
 #### Sample Response
  
