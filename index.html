@@ -561,9 +561,139 @@ OAuth2 and its extension OpenId Connect Protocol (http://openid.net/connect/) is
 
 <p>Before a product can be released to the public, rigorous reviews have to be performed by store administrators to ensure quality of the product.  Both items and offers need to go through the reviews.</p>
 
-<p>Following is the life cycle diagram of an item or offer object.  A developer or publisher creates a &ldquo;Draft&rdquo; and submits it to the store admin for  &ldquo;PendingReview&rdquo;.   Admin decides whether to approve or reject the item/offer.  Once the state becomes &ldquo;Approved&rdquo;, the object is ready to be sold. </p>
+<p>Following is the life cycle diagram of an item or offer object.  A developer or publisher creates a <strong>Draft</strong> and submits it to the store admin for  <strong>PendingReview</strong>.   Admin decides whether to approve or reject the item/offer.  Once the state becomes <strong>Approved</strong>, the object is ready to be sold. </p>
 
 <p><img alt="Offer State Diagram" src="images/offer_state.png" /></p>
+
+<h3 id="offer-bundles">Offer Bundles</h3>
+
+<p>An offer can be associated with 0 to many offers, and 1 to many items. As a result, on the UI, the developers can create a new offer that &ldquo;bundles&rdquo; multiple existing offers together. For example, the following &ldquo;All-in-one-Pack&rdquo; offer bundled an &ldquo;Educational Pack offer&rdquo;, an &ldquo;Fun Pack offer&rdquo; and one other offer and item in one offer. </p>
+
+<p><img alt="Offer Bundles Diagram" src="images/offer_bundles.png" /></p>
+
+<h2 id="basic-offer-creation/publish-flow">Basic offer creation/publish flow</h2>
+
+<p><img alt="Offer Flow Diagram" src="images/offer_flow.png" /></p>
+
+<h3 id="create/update-and-publish-an-item">Create/Update and Publish an Item</h3>
+
+<p>Step 1. Developer creates an item</p>
+
+<h4 id="sample-request">Sample Request</h4>
+<pre class="highlight http"><span class="err">Method POST
+Uri http://api.silkcloud.com/items
+Body
+          {
+            "type": "APP",
+            "name": "demo item",
+            "ownerId": {"href": "https://api.silkcloud.com/v1/users/3234", "id": "3234"},
+            "skus":
+            [
+                {
+                    "id": 1,
+                    "externalSku": "abc-1",
+                    "inventory": 100
+                },
+                {
+                    "id": 2,
+                    "externalSku": "abc-2",
+                    "inventory": 10
+                }
+            ],
+
+             "properties":
+            {
+                "mainImage": "the img url"
+            }
+        }
+</span></pre>
+
+<p>#### Sample Response</p>
+<pre class="highlight http"><span class="err">  Status Code 200
+
+Body
+   {
+    "self": {
+        "href": "http://api.silkcloud.com/v1/items/1393402721479",
+        "id": "1393402721479"
+    },
+    "revision": 1,
+    "name": "demo item",
+    "status": "DRAFT",
+    "type": "APP",
+    "ownerId": {
+        "href": "http://api.silkcloud.com/v1/items/3234",
+        "id": "3234"
+    },
+    "skus": [
+        {
+            "id": 1,
+            "externalSku": "abc-1",
+            "inventory": 100
+        },
+        {
+            "id": 2,
+            "externalSku": "abc-2",
+            "inventory": 10
+        }
+    ],
+    "properties": {
+        "mainImage": "the img url"
+    }
+}
+</span></pre>
+
+<p>Step 2. Developer may update the item (the status of the item will stay as &ldquo;Design&rdquo;)</p>
+
+<h4 id="sample-request">Sample Request</h4>
+<pre class="highlight http"><span class="err">Method PUT
+
+Uri http://api.silkcloud.com/items/123
+
+Body
+
+        {
+            "name": "demo item 123",
+        }
+
+Sample response
+Status Code 200
+
+Body
+           {
+            "self": {"href": "https://data.silkcloud.com/v1/apps/item-123", "id": "item-123"},
+            "type": "APP",
+            "name": "demo item 123",
+            "revision": 2,
+            “status”: “DRAFT”,
+            "ownerId": {"href": "https://data.silkcloud.com/v1/apps/3234", "id": "3234"},
+            "skus":
+            {
+                {
+                    "id": 1,
+                    "externalSku": "abc-1",
+                    "inventory": 100
+                },
+                {
+                    "id": 2,
+                    "externalSku": "abc-2",
+                    "inventory": 10
+                }
+            }
+
+             "properties":
+            {
+                "mainImage": "the img url"
+            }
+
+             "createdTime": "2013-01-01T01:32:53Z",
+            "createdBy": {"href": "https://data.silkcloud.com/v1/users/3234", "id": "3234"},
+            "updatedTime": "2013-01-01T01:35:53Z",
+            "updatedBy": {"href": "https://data.silkcloud.com/v1/users/3234", "id": "3234"}
+        }
+
+
+</span></pre>
 
       </div>
       <div class="dark-box">
