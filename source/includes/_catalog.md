@@ -67,7 +67,7 @@ Body
   
 #### Sample Response
   
-```http
+```
 Status Code 200
  
 Body
@@ -106,7 +106,7 @@ Step 2. Developer may update the item (the status of the item will stay as "Desi
 
 #### Sample Request
 
-```http
+```
 Method PUT
  
 Uri http://api.silkcloud.com/items/123
@@ -118,7 +118,8 @@ Body
 ```
  
 #### Sample response
-```http
+
+```
 Status Code 200
  
 Body
@@ -155,5 +156,45 @@ Body
         }
 ```
 
-        
+Step 3. Developer submits the item for review (item status changed to "Pendin_review")
+
+#### Sample Request
+```
+Method POST
+Uri http://api.silkcloud.com/items/123/review
+Body
+     {
+     } 
+```
+
+#### Sample Response
+```
+Status Code 200
+Body
+           {
+                      “status”: “PENDING_REVIEW”,
+            }
+```
+
+Step 4.  Store admin review the item and take appropriate actions (Publish/Reject the item) 
+
+#### Sample Request
+
+```
+Method POST
+Uri http://api.silkcloud.com/items/123/publish
+Body
+            {
+            }
+```
+
+#### Sample Response
+```
+Status Code 200
+Body
+           {
+                      “status”: “ACTIVE”,
+            }       
+```
+
   
