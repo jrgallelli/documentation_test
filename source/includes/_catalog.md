@@ -36,7 +36,7 @@ Step 1. Developer creates an item
 
 #### Sample Request
 
-```http
+```
 Method POST
 Uri http://api.silkcloud.com/items
 Body
@@ -67,7 +67,7 @@ Body
   
 #### Sample Response
   
-```http
+```
 Status Code 200
  
 Body
@@ -106,7 +106,7 @@ Step 2. Developer may update the item (the status of the item will stay as "Desi
 
 #### Sample Request
 
-```http
+```
 Method PUT
  
 Uri http://api.silkcloud.com/items/123
