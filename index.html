@@ -609,7 +609,7 @@ Body
 </pre>
 
 <h4 id="sample-response">Sample Response</h4>
-<pre class="highlight http"><span class="err">Status Code 200
+<pre class="highlight plaintext">Status Code 200
 
 Body
    {
@@ -641,12 +641,12 @@ Body
         "mainImage": "the img url"
     }
 }
-</span></pre>
+</pre>
 
 <p>Step 2. Developer may update the item (the status of the item will stay as &ldquo;Design&rdquo;)</p>
 
 <h4 id="sample-request">Sample Request</h4>
-<pre class="highlight http"><span class="err">Method PUT
+<pre class="highlight plaintext">Method PUT
 
 Uri http://api.silkcloud.com/items/123
 
@@ -654,10 +654,10 @@ Body
 {
    "name": "demo item 123",
 }
-</span></pre>
+</pre>
 
 <h4 id="sample-response">Sample response</h4>
-<pre class="highlight http"><span class="err">Status Code 200
+<pre class="highlight plaintext">Status Code 200
 
 Body
            {
@@ -691,7 +691,43 @@ Body
             "updatedTime": "2013-01-01T01:35:53Z",
             "updatedBy": {"href": "https://data.silkcloud.com/v1/users/3234", "id": "3234"}
         }
-</span></pre>
+</pre>
+
+<p>Step 3. Developer submits the item for review (item status changed to &ldquo;Pendin_review&rdquo;)</p>
+
+<h4 id="sample-request">Sample Request</h4>
+<pre class="highlight plaintext">Method POST
+Uri http://api.silkcloud.com/items/123/review
+Body
+     {
+     } 
+</pre>
+
+<h4 id="sample-response">Sample Response</h4>
+<pre class="highlight plaintext">Status Code 200
+Body
+           {
+                      “status”: “PENDING_REVIEW”,
+            }
+</pre>
+
+<p>Step 4.  Store admin review the item and take appropriate actions (Publish/Reject the item) </p>
+
+<h4 id="sample-request">Sample Request</h4>
+<pre class="highlight plaintext">Method POST
+Uri http://api.silkcloud.com/items/123/publish
+Body
+            {
+            }
+</pre>
+
+<h4 id="sample-response">Sample Response</h4>
+<pre class="highlight plaintext">Status Code 200
+Body
+           {
+                      “status”: “ACTIVE”,
+            }       
+</pre>
 
       </div>
       <div class="dark-box">
